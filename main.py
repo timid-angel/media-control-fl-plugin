@@ -1,14 +1,14 @@
+from pathlib import Path
+import sys,os
+parent_folder_path = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(parent_folder_path)
+sys.path.append(os.path.join(parent_folder_path, 'lib'))
+sys.path.append(os.path.join(parent_folder_path, 'plugin'))
+
+from flowlauncher import FlowLauncher
 import webbrowser
-from flowLauncher import FlowLauncher
-import sys
-import os
-parent_folder = os.path.abspath(os.path.dirname(__file__))
-sys.path.append(parent_folder)
-sys.path.append(os.path.join(parent_folder, 'lib'))
-sys.path.append(os.path.join(parent_folder, 'plugin'))
 
-
-class Nuntils(FlowLauncher):
+class Nutils(FlowLauncher):
 
     def query(self, query):
         return [
@@ -21,7 +21,7 @@ class Nuntils(FlowLauncher):
                     "parameters": ["https://github.com/Flow-Launcher/Flow.Launcher"]
                 },
                 "score": 0
-            }
+            },
         ]
 
     def context_menu(self, data):
@@ -40,7 +40,6 @@ class Nuntils(FlowLauncher):
 
     def open_url(self, url):
         webbrowser.open(url)
-
 
 if __name__ == "__main__":
     Nutils()
