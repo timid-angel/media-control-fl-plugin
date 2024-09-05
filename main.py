@@ -13,14 +13,20 @@ KEYBOARD_MAPPING = {
     "pause/resume": "playpause",
     "next": "nexttrack",
     "prev": "prevtrack",
-    "stop": "stop"
+    "stop": "stop",
+    "volume_inc": "volumeup",
+    "volume_dec": "volumedown",
+    "mute": "volumemute"
 }
 
 COMMAND_NAMES = {
     "pause_or_resume_media": "pause/resume",
     "next_media": "next",
     "prev_media": "prev",
-    "stop_media": "stop"
+    "stop_media": "stop",
+    "volume_inc": "vu",
+    "volume_dec": "vd",
+    "mute": "mute",
 }
 
 COMMANDS = [
