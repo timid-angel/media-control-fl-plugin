@@ -1,0 +1,12 @@
+{
+  "ID": "618070cc-1a40-42de-b4d8-5c244943d4ce",
+  "ActionKeyword": "nut",
+  "Name": "Nutils",
+  "Description": "",
+  "Author": "timid-angel",
+  "Version": "0.1",
+  "Language": "python",
+  "Website": "https://github.com/timid-angel/",
+  "IcoPath": "images\\app.png",
+  "ExecuteFileName": "main.py"
+}
