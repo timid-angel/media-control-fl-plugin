@@ -20,8 +20,48 @@ class Nutils(FlowLauncher):
                     "method": "open_url",
                     "parameters": ["https://github.com/Flow-Launcher/Flow.Launcher"]
                 },
-                "score": 0
+                "score": 1
             },
+            {
+                "title": "pause/resume",
+                "subTitle": "Pause or resume playing media",
+                "icoPath": "images/app.png",
+                "score": 1,
+                "jsonRPCAction": {
+                    "method": "pause_resume_media",
+                    "parameters": []
+                }
+            },
+            {
+                "title": "next",
+                "subTitle": "Plays next media if it is available",
+                "icoPath": "images/app.png",
+                "score": 1,
+                "jsonRPCAction": {
+                    "method": "next_media",
+                    "parameters": []
+                }
+            },
+            {
+                "title": "prev",
+                "subTitle": "Plays previous media if it is available",
+                "icoPath": "images/app.png",
+                "score": 1,
+                "jsonRPCAction": {
+                    "method": "prev_media",
+                    "parameters": []
+                }
+            },
+            {
+                "title": "stop",
+                "subTitle": "Stops playing media",
+                "icoPath": "images/app.png",
+                "score": 1,
+                "jsonRPCAction": {
+                    "method": "stop_media",
+                    "parameters": []
+                }
+            }
         ]
 
     def context_menu(self, data):
