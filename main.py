@@ -7,6 +7,14 @@ sys.path.append(os.path.join(parent_folder_path, 'plugin'))
 
 from flowlauncher import FlowLauncher
 import webbrowser
+import pyautogui
+
+KEYBOARD_MAPPING = {
+    "pause/resume": "playpause",
+    "next": "nexttrack",
+    "prev": "prevtrack",
+    "stop": "stop"
+}
 
 COMMAND_NAMES = {
     "pause_or_resume_media": "pause/resume",
@@ -22,7 +30,7 @@ COMMANDS = [
             "icoPath": "images/app.png",
             "score": 1,
             "jsonRPCAction": {
-                "method": "pause_resume_media",
+                "method": "pause_or_resume_media",
                 "parameters": []
             }
         },
@@ -87,6 +95,19 @@ class Nutils(FlowLauncher):
                 "score": 0
             }
         ]
+
+    def pause_or_resume_media(self):
+        pyautogui.press(KEYBOARD_MAPPING["pause/resume"])
+    
+    def next_media(self):
+        pyautogui.press(KEYBOARD_MAPPING["next"])
+    
+    def prev_media(self):
+        pyautogui.press(KEYBOARD_MAPPING["prev"], presses=2)
+    
+    def stop_media(self):
+        pyautogui.press(KEYBOARD_MAPPING["stop"])
+
 
     def open_url(self, url):
         webbrowser.open(url)
