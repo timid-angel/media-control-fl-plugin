@@ -69,6 +69,36 @@ COMMANDS = [
                 "method": "stop_media",
                 "parameters": []
             }
+        },
+        {
+            "title": COMMAND_NAMES["volume_inc"],
+            "subTitle": "Increases volume by indicated amount",
+            "icoPath": "images/app.png",
+            "score": 1,
+            "jsonRPCAction": {
+                "method": "volume_inc",
+                "parameters": []
+            }
+        },
+        {
+            "title": COMMAND_NAMES["volume_dec"],
+            "subTitle": "Decreases volume by indicated amount",
+            "icoPath": "images/app.png",
+            "score": 1,
+            "jsonRPCAction": {
+                "method": "volume_dec",
+                "parameters": []
+            }
+        },
+        {
+            "title": COMMAND_NAMES["mute"],
+            "subTitle": "Mutes system volume",
+            "icoPath": "images/app.png",
+            "score": 1,
+            "jsonRPCAction": {
+                "method": "mute",
+                "parameters": []
+            }
         }
     ]
 
