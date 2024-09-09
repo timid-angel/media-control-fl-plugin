@@ -6,7 +6,7 @@
   "Author": "timid-angel",
   "Version": "0.1",
   "Language": "python",
-  "Website": "https://github.com/timid-angel/",
+  "Website": "https://github.com/timid-angel/media-control-fl-plugin",
   "IcoPath": "images/app.png",
   "ExecuteFileName": "main.py"
 }
