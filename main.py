@@ -30,6 +30,8 @@ COMMAND_NAMES = {
     "mute": "mute",
 }
 
+APP_IMG = "images/app.png"
+
 
 class Nutils(FlowLauncher):
 
@@ -39,12 +41,12 @@ class Nutils(FlowLauncher):
         for arg in arguments:
             if arg != "":
                 query_data.append(arg)
-        
+
         commands = [
             {
                 "title": COMMAND_NAMES["pause_or_resume_media"],
                 "subTitle": "Pause or resume playing media",
-                "icoPath": "images/app.png",
+                "icoPath": APP_IMG,
                 "score": 1,
                 "jsonRPCAction": {
                     "method": "pause_or_resume_media",
@@ -54,7 +56,7 @@ class Nutils(FlowLauncher):
             {
                 "title": COMMAND_NAMES["next_media"],
                 "subTitle": "Plays next media if it is available",
-                "icoPath": "images/app.png",
+                "icoPath": APP_IMG,
                 "score": 1,
                 "jsonRPCAction": {
                     "method": "next_media",
@@ -64,7 +66,7 @@ class Nutils(FlowLauncher):
             {
                 "title": COMMAND_NAMES["prev_media"],
                 "subTitle": "Plays previous media if it is available",
-                "icoPath": "images/app.png",
+                "icoPath": APP_IMG,
                 "score": 1,
                 "jsonRPCAction": {
                     "method": "prev_media",
@@ -74,7 +76,7 @@ class Nutils(FlowLauncher):
             {
                 "title": COMMAND_NAMES["stop_media"],
                 "subTitle": "Stops playing media",
-                "icoPath": "images/app.png",
+                "icoPath": APP_IMG,
                 "score": 1,
                 "jsonRPCAction": {
                     "method": "stop_media",
@@ -84,7 +86,7 @@ class Nutils(FlowLauncher):
             {
                 "title": COMMAND_NAMES["volume_inc"] + ((" " + query_data[1]) if len(query_data) > 1 else " #"),
                 "subTitle": f"Increases volume by {(query_data[1] if len(query_data) > 1 else "the specified amount")}" if (len(query_data) <= 1 or query_data[1].isdigit()) else "Invalid input: second argument must be a non-negative number",
-                "icoPath": "images/app.png",
+                "icoPath": APP_IMG,
                 "score": 1,
                 "jsonRPCAction": {
                     "method": "volume_inc",
@@ -94,7 +96,7 @@ class Nutils(FlowLauncher):
             {
                 "title": COMMAND_NAMES["volume_dec"] + ((" " + query_data[1]) if len(query_data) > 1 else " #"),
                 "subTitle": f"Decreases volume by {(query_data[1] if len(query_data) > 1 else "the specified amount")}" if (len(query_data) <= 1 or query_data[1].isdigit()) else "Invalid input: second argument must be a non-negative number",
-                "icoPath": "images/app.png",
+                "icoPath": APP_IMG,
                 "score": 1,
                 "jsonRPCAction": {
                     "method": "volume_dec",
@@ -104,7 +106,7 @@ class Nutils(FlowLauncher):
             {
                 "title": COMMAND_NAMES["mute"],
                 "subTitle": "Mutes system volume",
-                "icoPath": "images/app.png",
+                "icoPath": APP_IMG,
                 "score": 1,
                 "jsonRPCAction": {
                     "method": "mute",
@@ -116,10 +118,6 @@ class Nutils(FlowLauncher):
         if len(query) == 0:
             return commands
 
-        # file = open("./log.txt", "+a")
-        # file.write(f"{query}\n")
-        # file.close()
-
         return self.resolve_query(query.strip().lower(), commands)
 
     def resolve_query(self, arg: str, commands: list) -> list:
@@ -129,20 +127,6 @@ class Nutils(FlowLauncher):
                 query_result.append(command)
 
         return query_result
-
-    def context_menu(self, data):
-        return [
-            {
-                "title": "Hello World Python's Context menu",
-                "subTitle": "Press enter to open Flow the plugin's repo in GitHub",
-                "icoPath": "Images/app.png",  # related path to the image
-                "jsonRPCAction": {
-                    "method": "open_url",
-                    "parameters": ["https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldPython"]
-                },
-                "score": 0
-            }
-        ]
 
     def pause_or_resume_media(self):
         pyautogui.press(KEYBOARD_MAPPING["pause/resume"])
@@ -159,7 +143,7 @@ class Nutils(FlowLauncher):
     def volume_inc(self, amount=1):
         if type(amount) == str and not amount.isdigit():
             return
-        
+
         amount = min(int(amount), 100)
         pyautogui.press(
             KEYBOARD_MAPPING["volume_inc"], presses=ceil(amount / 2))
@@ -167,7 +151,7 @@ class Nutils(FlowLauncher):
     def volume_dec(self, amount=1):
         if type(amount) == str and not amount.isdigit():
             return
-        
+
         amount = min(int(amount), 100)
         pyautogui.press(
             KEYBOARD_MAPPING["volume_dec"], presses=ceil(amount / 2))
@@ -181,5 +165,3 @@ class Nutils(FlowLauncher):
 
 if __name__ == "__main__":
     Nutils()
-    # for c in pyautogui.KEYBOARD_KEYS:
-    #     print(c)
