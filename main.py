@@ -1,6 +1,5 @@
 import pyautogui
 import webbrowser
-from flowlauncher import FlowLauncher
 from math import ceil
 import sys
 import os
@@ -9,6 +8,7 @@ sys.path.append(parent_folder_path)
 sys.path.append(os.path.join(parent_folder_path, 'lib'))
 sys.path.append(os.path.join(parent_folder_path, 'plugin'))
 
+from flowlauncher import FlowLauncher
 
 KEYBOARD_MAPPING = {
     "pause/resume": "playpause",
@@ -40,7 +40,7 @@ class Nutils(FlowLauncher):
             if arg != "":
                 query_data.append(arg)
         
-        COMMANDS = [
+        commands = [
             {
                 "title": COMMAND_NAMES["pause_or_resume_media"],
                 "subTitle": "Pause or resume playing media",
@@ -82,13 +82,13 @@ class Nutils(FlowLauncher):
                 }
             },
             {
-                "title": COMMAND_NAMES["volume_inc"],
-                "subTitle": "Increases volume by indicated amount",
+                "title": COMMAND_NAMES["volume_inc"] + ((" " + query_data[1]) if len(query_data) > 1 else " #"),
+                "subTitle": f"Increases volume by {(query_data[1] if len(query_data) > 1 else "the specified amount")}" if (len(query_data) <= 1 or query_data[1].isdigit()) else "Invalid input: second argument must be a non-negative number",
                 "icoPath": "images/app.png",
                 "score": 1,
                 "jsonRPCAction": {
                     "method": "volume_inc",
-                    "parameters": [query_data[1]]
+                    "parameters": [query_data[1]] if len(query_data) > 1 else []
                 }
             },
             {
@@ -98,7 +98,7 @@ class Nutils(FlowLauncher):
                 "score": 1,
                 "jsonRPCAction": {
                     "method": "volume_dec",
-                    "parameters": [query_data[1]]
+                    "parameters": [query_data[1]] if len(query_data) > 1 else []
                 }
             },
             {
@@ -114,7 +114,11 @@ class Nutils(FlowLauncher):
         ]
 
         if len(query) == 0:
-            return COMMANDS
+            return commands
+
+        # file = open("./log.txt", "+a")
+        # file.write(f"{query}\n")
+        # file.close()
 
         return self.resolve_query(query.strip().lower(), commands)
 
@@ -153,6 +157,10 @@ class Nutils(FlowLauncher):
         pyautogui.press(KEYBOARD_MAPPING["stop"])
 
     def volume_inc(self, amount=1):
+        if type(amount) == str and not amount.isdigit():
+            return
+        
+        amount = min(int(amount), 100)
         pyautogui.press(
             KEYBOARD_MAPPING["volume_inc"], presses=ceil(amount / 2))
 
