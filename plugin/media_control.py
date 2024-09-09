@@ -2,6 +2,10 @@ import pyautogui
 from math import ceil
 from flowlauncher import FlowLauncher
 
+"""
+Mapping of the features to their respective keyboard shortcut names.
+These can be found in `pyautogui.KEYBOARD_KEYS` or `pyautogui.KEYBOARD_MAPPING`.
+"""
 KEYBOARD_MAPPING = {
     "pause/resume": "playpause",
     "next": "nexttrack",
@@ -12,6 +16,9 @@ KEYBOARD_MAPPING = {
     "mute": "volumemute"
 }
 
+"""
+Mapping of the features to their respective action keywords in the flowlauncher client.
+"""
 COMMAND_NAMES = {
     "pause_or_resume_media": "pause/resume",
     "next_media": "next",
@@ -24,9 +31,13 @@ COMMAND_NAMES = {
 
 APP_IMG = "images/app.png"
 
-
+"""
+Defines the MediaControl class that extends the FlowLauncher class and
+implements the methods to control media playback on the system.
+"""
 class MediaControl(FlowLauncher):
 
+    # Handles the query and returns the relevant commands
     def query(self, query: str) -> list:
         arguments = list(map(lambda x: x.strip(), query.lower().split(" ")))
         query_data = []
@@ -112,6 +123,7 @@ class MediaControl(FlowLauncher):
 
         return self.resolve_query(query.strip().lower(), commands)
 
+    # Method to resolve the query and return the relevant commands
     def resolve_query(self, arg: str, commands: list) -> list:
         query_result = []
         for command in commands:
@@ -150,6 +162,3 @@ class MediaControl(FlowLauncher):
 
     def mute(self):
         pyautogui.press(KEYBOARD_MAPPING["mute"])
-
-    def open_url(self, url):
-        webbrowser.open(url)
