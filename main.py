@@ -92,8 +92,8 @@ class Nutils(FlowLauncher):
                 }
             },
             {
-                "title": COMMAND_NAMES["volume_dec"],
-                "subTitle": "Decreases volume by indicated amount",
+                "title": COMMAND_NAMES["volume_dec"] + ((" " + query_data[1]) if len(query_data) > 1 else " #"),
+                "subTitle": f"Decreases volume by {(query_data[1] if len(query_data) > 1 else "the specified amount")}" if (len(query_data) <= 1 or query_data[1].isdigit()) else "Invalid input: second argument must be a non-negative number",
                 "icoPath": "images/app.png",
                 "score": 1,
                 "jsonRPCAction": {
@@ -165,6 +165,10 @@ class Nutils(FlowLauncher):
             KEYBOARD_MAPPING["volume_inc"], presses=ceil(amount / 2))
 
     def volume_dec(self, amount=1):
+        if type(amount) == str and not amount.isdigit():
+            return
+        
+        amount = min(int(amount), 100)
         pyautogui.press(
             KEYBOARD_MAPPING["volume_dec"], presses=ceil(amount / 2))
 
@@ -177,3 +181,5 @@ class Nutils(FlowLauncher):
 
 if __name__ == "__main__":
     Nutils()
+    # for c in pyautogui.KEYBOARD_KEYS:
+    #     print(c)
